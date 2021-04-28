@@ -53,6 +53,11 @@ RSpec.describe Park do
       expect(park2.trails_shorter_than(2.5)).to eq([])
     end
 
+    it '#hikeable_miles returns total length of trails in a park' do
+      expect(park1.hikeable_miles).to eq(7.5)
+      expect(park2.hikeable_miles).to eq(16.9)
+    end
+
   end
 
 end

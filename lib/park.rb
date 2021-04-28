@@ -45,7 +45,6 @@ class Park
     elsif @visitors_log[Date.today.year][Date.today.strftime("%m/%d")].nil?
       @visitors_log[Date.today.year][Date.today.strftime("%m/%d")] = {hiker => hiker.possible_trails}
     else
-      # require 'pry'; binding.pry
       @visitors_log[Date.today.year][Date.today.strftime("%m/%d")][hiker] = hiker.possible_trails
     end
   end

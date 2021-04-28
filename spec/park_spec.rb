@@ -146,7 +146,7 @@ RSpec.describe Park do
                                     }
                         },
               }
-
+    # require 'pry'; binding.pry
     expect(park.visitors_log).to eq(expected)
   end
 

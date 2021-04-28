@@ -40,4 +40,16 @@ RSpec.describe Hiker do
     end
   end
 
+  describe '#visit' do
+    hiker = Hiker.new('Dora', :moderate)
+    park1 = Park.new('Capitol Reef')
+    park2 = Park.new('Bryce Canyon')
+    hiker.visit(park1)
+    hiker.visit(park2)
+
+    it 'adds park to the parks_visited array' do
+      expect(hiker.parks_visited).to eq([park1, park2])
+    end
+  end
+
 end

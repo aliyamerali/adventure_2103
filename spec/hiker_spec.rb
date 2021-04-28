@@ -23,6 +23,10 @@ RSpec.describe Hiker do
     it 'starts with an empty array of parks visited' do
       expect(hiker.parks_visited).to eq([])
     end
+
+    it 'starts with an empty hash of park_visit_logs' do
+      expect(hiker.park_visit_logs).to eq({})
+    end
   end
 
   describe '#pack' do

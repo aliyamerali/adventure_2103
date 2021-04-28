@@ -29,6 +29,12 @@ class Hiker
   end
 
   def visit(park)
+    if @park_visit_logs[Date.today].nil? #TO REFACTOR into helper method
+      @park_visit_logs[Date.today] = [park]
+    else
+      @park_visit_logs[Date.today] << park
+    end
+
     @parks_visited << park
     @parks_visited.uniq!
   end

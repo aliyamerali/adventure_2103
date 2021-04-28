@@ -75,11 +75,7 @@ RSpec.describe Hiker do
     end
 
     it 'adds park and date visited to the park_visit_logs' do
-      expected = {
-                  Date.today => park1,
-                  Date.today => park2,
-                  Date.today => park2
-      }
+      expected = { Date.today => [park1, park2, park2] }
       expect(hiker.park_visit_logs).to eq(expected)
     end
   end

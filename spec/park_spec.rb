@@ -19,6 +19,10 @@ RSpec.describe Park do
     it 'starts with an empty array of trails' do
       expect(park.trails).to eq([])
     end
+
+    it 'starts with an empty hash of visitors_log' do
+      expect(park.visitors_log).to eq({})
+    end
   end
 
   describe '#add_trail' do
@@ -89,7 +93,7 @@ RSpec.describe Park do
     hiker2 = Hiker.new('Frank', :easy)
     hiker3 = Hiker.new('Jack', :strenuous)
     hiker4 = Hiker.new('Sally', :strenuous)
-    
+
     #This visit occurs on June 23, 1980
     allow(Date).to receive(:today) {Date.new(1980,06,23)}
     hiker1.visit(park)
@@ -117,31 +121,31 @@ RSpec.describe Park do
     hiker4.visit(park)
 
     expected = {
-       1980 => {
-                 "06/23" => {
-                   #<Hiker:0x00007f8f02184208...> => [#<Trail:0x00007f8f040e25c8...>, #<Trail:0x00007f8f03191ee8...>]
-                 },
-                 "06/24" => {
-                   #<Hiker:0x00007f8f029afb30...> => [#<Trail:0x00007f8f022c6878...>],
-                   #<Hiker:0x00007f8f04045e30...> => [#<Trail:0x00007f8f022e5160...>]
-                 },
-                 "06/25" => {
-                   #<Hiker:0x00007f8f02326390...> => [#<Trail:0x00007f8f022e5160...>]
-                 }
-              },
-       2020 => {
-                 "06/23" => {
-                   #<Hiker:0x00007f8f02184208...> => [#<Trail:0x00007f8f040e25c8...>, #<Trail:0x00007f8f03191ee8...>]
-                 },
-                 "06/24" => {
-                   #<Hiker:0x00007f8f029afb30...> => [#<Trail:0x00007f8f022c6878...>],
-                   #<Hiker:0x00007f8f04045e30...> => [#<Trail:0x00007f8f022e5160...>]
-                 },
-                 "06/25" => {
-                   #<Hiker:0x00007f8f02326390...> => [#<Trail:0x00007f8f022e5160...>]
-                 }
-               },
-      }
+               1980 => {
+                         "06/23" => {
+                                     hiker1 => hiker1.possible_trails
+                                   },
+                         "06/24" => {
+                                     hiker2 => hiker2.possible_trails,
+                                     hiker3 => hiker3.possible_trails
+                                   },
+                         "06/25" => {
+                                     hiker4 => hiker4.possible_trails
+                                   }
+                      },
+               2020 => {
+                         "06/23" => {
+                                    hiker1 => hiker1.possible_trails
+                                    },
+                         "06/24" => {
+                                     hiker2 => hiker2.possible_trails,
+                                     hiker3 => hiker3.possible_trails
+                                    },
+                         "06/25" => {
+                                     hiker4 => hiker4.possible_trails
+                                    }
+                        },
+              }
 
     expect(park.visitors_log).to eq(expected)
   end

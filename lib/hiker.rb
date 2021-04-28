@@ -2,15 +2,13 @@ class Hiker
   attr_reader :name,
               :experience_level,
               :snacks,
-              :parks_visited,
-              :park_visit_logs
+              :parks_visited
 
   def initialize(name, experience_level)
     @name = name
     @experience_level = experience_level
     @snacks = {}
     @parks_visited = []
-    @park_visit_logs = {}
   end
 
   def pack(snack, amount)
@@ -29,12 +27,7 @@ class Hiker
   end
 
   def visit(park)
-    if @park_visit_logs[Date.today].nil? #TO REFACTOR into helper method
-      @park_visit_logs[Date.today] = [park]
-    else
-      @park_visit_logs[Date.today] << park
-    end
-
+    park.receive_visitor(self)
     @parks_visited << park
     @parks_visited.uniq!
   end

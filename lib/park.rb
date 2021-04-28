@@ -1,9 +1,10 @@
 class Park
-  attr_reader :name, :trails
+  attr_reader :name, :trails, :visitors_log
 
   def initialize(name)
     @name = name
     @trails = []
+    @visitors_log = {}
   end
 
   def add_trail(trail)
@@ -37,4 +38,18 @@ class Park
       trail_names_by_level
     end
   end
+
+  def receive_visitor(hiker)
+    if @visitors_log[Date.today.year].nil?
+      if [Date.today].nil?
+        @visitors_log[Date.today.year][Date.today] = [{hiker => hiker.possible_trails}]
+      else
+        @visitors_log[Date.today.year][Date.today] << {hiker => hiker.possible_trails}
+      end
+    else
+      @visitors_log[Date.today.year][Date.today] = [{hiker => hiker.possible_trails}]
+    end
+    # require 'pry'; binding.pry
+  end
+
 end

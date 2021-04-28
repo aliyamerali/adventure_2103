@@ -3,7 +3,7 @@ require './lib/park'
 RSpec.describe Park do
 
   describe '#initialize' do
-    park1 = Park.new('Capitol Reef')
+    park = Park.new('Capitol Reef')
 
     it 'exists' do
       expect(park).to be_instance_of(Park)

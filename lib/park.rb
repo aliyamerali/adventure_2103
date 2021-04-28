@@ -15,4 +15,10 @@ class Park
       trail.length < length
     end
   end
+
+  def hikeable_miles
+    @trails.sum do |trail|
+      trail.length
+    end
+  end
 end

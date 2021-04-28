@@ -27,6 +27,7 @@ class Park
       trail.level
     end
 
+    #REFACTOR: helper to get names from an array of trail objects?
     trail_objects_by_level.reduce({}) do |trail_names_by_level, hash_element_array|
       level = hash_element_array[0]
       trails = hash_element_array[1]

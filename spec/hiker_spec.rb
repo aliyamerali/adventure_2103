@@ -63,6 +63,11 @@ RSpec.describe Hiker do
     it 'adds park to the parks_visited array' do
       expect(hiker.parks_visited).to eq([park1, park2])
     end
+
+    it 'does not add a park multiple times if it is visited more than once' do
+      hiker.visit(park2)
+      expect(hiker.parks_visited).to eq([park1, park2])
+    end
   end
 
   describe '#possible_trails' do

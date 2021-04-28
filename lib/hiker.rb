@@ -7,4 +7,12 @@ class Hiker
     @snacks = {}
   end
 
+  def pack(snack, amount)
+    if @snacks[snack].nil?
+      @snacks[snack] = amount
+    else
+      @snacks[snack] += amount
+    end
+  end
+
 end

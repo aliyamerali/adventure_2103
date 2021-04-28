@@ -16,4 +16,8 @@ class Hiker
     end
   end
 
+  def visit(park)
+    @parks_visited << park
+  end
+
 end

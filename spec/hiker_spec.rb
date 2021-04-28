@@ -71,7 +71,7 @@ RSpec.describe Hiker do
     end
 
     it 'calls receive_visitor on the park' do
-      expect(park1.visitors_log[Date.today.year][Date.today].keys).to eq(hiker)
+      expect(park1.visitors_log[Date.today.year][Date.today.strftime("%m/%d")][hiker]).to eq(hiker.possible_trails)
     end
   end
 

@@ -41,12 +41,12 @@ class Park
 
   def receive_visitor(hiker)
     if @visitors_log[Date.today.year].nil?
-      @visitors_log[Date.today.year] = {Date.today.strftime("%m/%d") => [{hiker => hiker.possible_trails}]}
+      @visitors_log[Date.today.year] = {Date.today.strftime("%m/%d") => {hiker => hiker.possible_trails}}
     elsif @visitors_log[Date.today.year][Date.today.strftime("%m/%d")].nil?
-      @visitors_log[Date.today.year][Date.today.strftime("%m/%d")] = [{hiker => hiker.possible_trails}]
+      @visitors_log[Date.today.year][Date.today.strftime("%m/%d")] = {hiker => hiker.possible_trails}
     else
       # require 'pry'; binding.pry
-      @visitors_log[Date.today.year][Date.today.strftime("%m/%d")] << {hiker => hiker.possible_trails}
+      @visitors_log[Date.today.year][Date.today.strftime("%m/%d")][hiker] = hiker.possible_trails
     end
   end
 

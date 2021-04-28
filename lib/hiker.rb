@@ -20,4 +20,13 @@ class Hiker
     @parks_visited << park
   end
 
+  def possible_trails
+    @parks_visited.reduce([]) do |possible_trails, park|
+      possible_trails << park.trails.find_all do |trail|
+        trail.level == experience_level
+      end
+      possible_trails.flatten
+    end
+  end
+
 end

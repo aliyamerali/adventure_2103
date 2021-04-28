@@ -40,6 +40,19 @@ RSpec.describe Hiker do
     end
   end
 
+  describe '#favorite_snack' do
+    hiker = Hiker.new('Dora', :moderate)
+    hiker.pack('water', 2)
+    hiker.pack('trail mix', 1)
+    hiker.pack('apple', 4)
+    hiker.pack('carrot', 3)
+
+    it 'returns the name of the snack the hiker has packed the most of' do
+      expect(hiker.favorite_snack).to eq("apple")
+    end
+
+  end
+
   describe '#visit' do
     hiker = Hiker.new('Dora', :moderate)
     park1 = Park.new('Capitol Reef')

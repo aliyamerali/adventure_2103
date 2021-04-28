@@ -3,7 +3,7 @@ class Trail
 
   def initialize(info_hash)
     @name = info_hash[:name]
-    @length = info_hash[:length]
+    @length = info_hash[:length].to_f
     @level = info_hash[:level]
   end
 

@@ -14,7 +14,7 @@ RSpec.describe Park do
       expect(park.name).to eq('Capitol Reef')
     end
 
-    it 'has starts with an empty array of trails' do
+    it 'starts with an empty array of trails' do
       expect(park.trails).to eq([])
     end
   end

@@ -29,6 +29,11 @@ RSpec.describe Hiker do
     it 'adds snack and amounts to the @snacks hash' do
       expect(hiker.snacks).to eq({"water"=>1, "trail mix"=>3})
     end
+
+    it 'if snack item already exists, adds count to value in @snacks hash' do
+      hiker.pack('water', 1)
+      expect(hiker.snacks).to eq({"water"=>2, "trail mix"=>3})
+    end
   end
 
 end

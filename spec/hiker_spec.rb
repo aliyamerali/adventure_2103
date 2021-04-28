@@ -1,6 +1,7 @@
 require './lib/park'
 require './lib/trail'
 require './lib/hiker'
+require 'date'
 
 RSpec.describe Hiker do
 
@@ -71,6 +72,15 @@ RSpec.describe Hiker do
     it 'does not add a park multiple times if it is visited more than once' do
       hiker.visit(park2)
       expect(hiker.parks_visited).to eq([park1, park2])
+    end
+
+    it 'adds park and date visited to the park_visit_logs' do
+      expected = {
+                  Date.today => park1,
+                  Date.today => park2,
+                  Date.today => park2
+      }
+      expect(hiker.park_visit_logs).to eq(expected)
     end
   end
 

@@ -1,4 +1,5 @@
 class Trail
+  attr_reader :name, :length, :level
 
   def initialize(info_hash)
     @name = info_hash[:name]

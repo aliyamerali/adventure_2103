@@ -21,4 +21,19 @@ class Park
       trail.length
     end
   end
+
+  def trails_by_level
+    trail_objects_by_level = @trails.group_by do |trail|
+      trail.level
+    end
+
+    trail_objects_by_level.reduce({}) do |trail_names_by_level, hash_element_array|
+      level = hash_element_array[0]
+      trails = hash_element_array[1]
+      trail_names_by_level[level] = trails.map do |trail|
+        trail.name
+      end
+      trail_names_by_level
+    end
+  end
 end

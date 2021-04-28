@@ -1,5 +1,7 @@
 require './lib/park'
 require './lib/trail'
+require './lib/hiker'
+require 'date'
 
 RSpec.describe Park do
 
@@ -71,7 +73,77 @@ RSpec.describe Park do
       expect(park1.trails_by_level).to eq(expected1)
       expect(park2.trails_by_level).to eq(expected2)
     end
+  end
 
+  it '#visitors_log returns hash by year of visitors by date including visitor possible trails' do
+    trail1 = Trail.new({name: 'Rim Trail', length: '11 miles', level: :easy})
+    trail2 = Trail.new({name: "Queen's/Navajo Loop", length: '2.9 miles', level: :moderate})
+    trail3 = Trail.new({name: 'Tower Bridge', length: '3 miles', level: :moderate})
+    trail4 = Trail.new({name: 'Peekaboo Loop', length: '5.5 miles', level: :strenuous})
+    park = Park.new('Bryce Canyon')
+    park.add_trail(trail1)
+    park.add_trail(trail2)
+    park.add_trail(trail3)
+    park.add_trail(trail4)
+    hiker1 = Hiker.new('Dora', :moderate)
+    hiker2 = Hiker.new('Frank', :easy)
+    hiker3 = Hiker.new('Jack', :strenuous)
+    hiker4 = Hiker.new('Sally', :strenuous)
+    
+    #This visit occurs on June 23, 1980
+    allow(Date).to receive(:today) {Date.new(1980,06,23)}
+    hiker1.visit(park)
+
+    #This visit occurs on June 24, 1980
+    allow(Date).to receive(:today) {Date.new(1980,06,24)}
+    hiker2.visit(park)
+    hiker3.visit(park)
+
+    #This visit occurs on June 25, 1980
+    allow(Date).to receive(:today) {Date.new(1980,06,25)}
+    hiker4.visit(park)
+
+    #This visit occurs on June 23, 2020
+    allow(Date).to receive(:today) {Date.new(2020,06,23)}
+    hiker1.visit(park)
+
+    #This visit occurs on June 24, 2020
+    allow(Date).to receive(:today) {Date.new(2020,06,24)}
+    hiker2.visit(park)
+    hiker3.visit(park)
+
+    #This visit occurs on June 25, 2020
+    allow(Date).to receive(:today) {Date.new(2020,06,25)}
+    hiker4.visit(park)
+
+    expected = {
+       1980 => {
+                 "06/23" => {
+                   #<Hiker:0x00007f8f02184208...> => [#<Trail:0x00007f8f040e25c8...>, #<Trail:0x00007f8f03191ee8...>]
+                 },
+                 "06/24" => {
+                   #<Hiker:0x00007f8f029afb30...> => [#<Trail:0x00007f8f022c6878...>],
+                   #<Hiker:0x00007f8f04045e30...> => [#<Trail:0x00007f8f022e5160...>]
+                 },
+                 "06/25" => {
+                   #<Hiker:0x00007f8f02326390...> => [#<Trail:0x00007f8f022e5160...>]
+                 }
+              },
+       2020 => {
+                 "06/23" => {
+                   #<Hiker:0x00007f8f02184208...> => [#<Trail:0x00007f8f040e25c8...>, #<Trail:0x00007f8f03191ee8...>]
+                 },
+                 "06/24" => {
+                   #<Hiker:0x00007f8f029afb30...> => [#<Trail:0x00007f8f022c6878...>],
+                   #<Hiker:0x00007f8f04045e30...> => [#<Trail:0x00007f8f022e5160...>]
+                 },
+                 "06/25" => {
+                   #<Hiker:0x00007f8f02326390...> => [#<Trail:0x00007f8f022e5160...>]
+                 }
+               },
+      }
+
+    expect(park.visitors_log).to eq(expected)
   end
 
 end

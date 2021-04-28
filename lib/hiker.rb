@@ -25,6 +25,7 @@ class Hiker
 
   def visit(park)
     @parks_visited << park
+    @parks_visited.uniq!
   end
 
   def possible_trails
